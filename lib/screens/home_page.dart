@@ -57,14 +57,14 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          "your life is worthless,",
+                          "Good Morning Jane,",
                           style: TextStyle(
                               fontSize: 18,
                               color: Color.fromARGB(255, 128, 127, 127)),
                         ),
                         SizedBox(height: 4),
                         Text(
-                          "KERJA! KERJA! KERJA! KERJA!",
+                          "Let's get to work!",
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
