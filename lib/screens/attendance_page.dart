@@ -8,7 +8,7 @@ class AttendancePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Attendance'),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.red,
       ),
       body: const Center(
         child: Text(
