@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:secondly/screens/attendance_page.dart';
+import 'package:secondly/screens/timesheets.dart';
 
 class Menu extends StatelessWidget {
   const Menu({super.key});
@@ -40,21 +42,7 @@ class Menu extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Jane doe",
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Text(
-                        "IT Support",
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 20,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 0),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -64,9 +52,10 @@ class Menu extends StatelessWidget {
                           );
                         },
                         child: const Text(
-                          "view profile",
+                          "View My Profile",
                           style: TextStyle(
                             color: Colors.blue,
+                            fontSize: 25,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -92,7 +81,11 @@ class Menu extends StatelessWidget {
                     icon: Icons.access_time,
                     label: "Attendance",
                     onTap: () {
-                      // Aksi ketika Attendance ditekan
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AttendancePage()),
+                      );
                     },
                   ),
                   // Tombol Project
@@ -100,7 +93,7 @@ class Menu extends StatelessWidget {
                     icon: Icons.assignment,
                     label: "Project",
                     onTap: () {
-                      // Aksi ketika Project ditekan
+                      _showComingSoonPopup(context);
                     },
                   ),
                   // Tombol Time Sheet
@@ -108,15 +101,34 @@ class Menu extends StatelessWidget {
                     icon: Icons.calendar_today,
                     label: "Time Sheet",
                     onTap: () {
-                      // Aksi ketika Time Sheet ditekan
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TimeSheetPage()),
+                      );
                     },
                   ),
                   // Tombol Leave
                   buildMenuButton(
-                    icon: Icons.cancel,
+                    icon: Icons.logout_outlined,
                     label: "Leave",
                     onTap: () {
-                      // Aksi ketika Leave ditekan
+                      _showComingSoonPopup(
+                          context); //belum dibuat, sudah ada design
+                    },
+                  ),
+                  buildMenuButton(
+                    icon: Icons.import_contacts_outlined,
+                    label: "E-Learning",
+                    onTap: () {
+                      _showComingSoonPopup(context);
+                    },
+                  ),
+                  buildMenuButton(
+                    icon: Icons.more_time_rounded,
+                    label: "SPL",
+                    onTap: () {
+                      _showComingSoonPopup(context);
                     },
                   ),
                 ],
@@ -155,6 +167,26 @@ class Menu extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showComingSoonPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Coming Soon"),
+          content: const Text("Sedang Dalam Pengembangan."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
     );
   }
 }

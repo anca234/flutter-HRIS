@@ -57,17 +57,17 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          "Good Morning Jane,",
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 128, 127, 127)),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          "Let's get to work!",
+                          "Jane Doe",
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 6),
+                        Text(
+                          "IT Support",
+                          style: TextStyle(
+                            fontSize: 18,
                           ),
                         ),
                       ],
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                   isClockedIn ? "Clock Out" : "Clock In",
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 26,
                   ),
                 ),
               ),
@@ -152,48 +152,7 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: ListTile(
-                      leading: Checkbox(
-                        value: false,
-                        onChanged: (bool? value) {},
-                      ),
-                      title: const Text(
-                        "Project Name",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: const Text(
-                        "Project leader\nPlanned squad name1, Planned squad name2",
-                      ),
-                      trailing: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: const Text(
-                          "Planned",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
+            NextActivityWidget(),
 
             // More Button
             Padding(
@@ -220,6 +179,76 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class NextActivityWidget extends StatefulWidget {
+  const NextActivityWidget({Key? key}) : super(key: key);
+
+  @override
+  _NextActivityWidgetState createState() => _NextActivityWidgetState();
+}
+
+class _NextActivityWidgetState extends State<NextActivityWidget> {
+  final List<Map<String, dynamic>> activities = [
+    {
+      "title": "Project Name 1",
+      "subtitle": "Project leader\nPlanned squad name1, Planned squad name2",
+      "isDone": false,
+    },
+    {
+      "title": "Project Name 2",
+      "subtitle": "Project leader\nPlanned squad name3, Planned squad name4",
+      "isDone": false,
+    },
+    {
+      "title": "Project Name 3",
+      "subtitle": "Project leader\nPlanned squad name5, Planned squad name6",
+      "isDone": false,
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: activities.map((activity) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ListTile(
+              leading: Checkbox(
+                value: activity["isDone"],
+                onChanged: (bool? value) {
+                  setState(() {
+                    activity["isDone"] = value!;
+                  });
+                },
+              ),
+              title: Text(
+                activity["title"],
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(activity["subtitle"]),
+              trailing: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: activity["isDone"] ? Colors.green : Colors.orange,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  activity["isDone"] ? "Done" : "Planned",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }
