@@ -183,6 +183,18 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+class AttendanceRecord {
+  final DateTime clockIn;
+  final DateTime clockOut;
+  final Duration workingDuration;
+
+  AttendanceRecord({
+    required this.clockIn,
+    required this.clockOut,
+    required this.workingDuration,
+  });
+}
+
 class NextActivityWidget extends StatefulWidget {
   const NextActivityWidget({Key? key}) : super(key: key);
 
