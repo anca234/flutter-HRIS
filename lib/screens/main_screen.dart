@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'attendance_page.dart';
 import 'timesheets.dart';
-import 'menu.dart';
+import 'notification.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -41,7 +41,8 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.calendar_today), label: "Time Sheets"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.grid_view), label: "Profile"),
+              icon: Icon(Icons.notification_important_outlined),
+              label: "Notification"),
         ],
       ),
     );
