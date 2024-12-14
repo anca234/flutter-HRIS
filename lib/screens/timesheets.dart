@@ -19,7 +19,7 @@ class TimeSheetPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Time Sheet'),
+        title: const Text("Time Sheets", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.red,
       ),
       body: SingleChildScrollView(

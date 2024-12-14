@@ -39,9 +39,8 @@ class AttendancePageState extends State<AttendancePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[200],
-        elevation: 0,
-        toolbarHeight: 0,
+        title: const Text("Attendance", style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.red,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -92,6 +91,15 @@ class AttendancePageState extends State<AttendancePage> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 8),
+                    Text(
+                      totalWorkingTime,
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 23,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const Divider(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,8 +116,141 @@ class AttendancePageState extends State<AttendancePage> {
                 ),
               ),
             ),
+
+            // Daily Report Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                'Daily Report',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            for (int i = 0; i < 4; i++)
+              DailyReportCard(
+                month: '00',
+                clockIn: '00:00:00',
+                clockOut: i == 2 ? 'Weekend' : '00:00:00',
+                isWeekend: i == 2,
+              ),
+
+            // Summary Section
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  SummaryCard(
+                      label: 'Working Days',
+                      value: '00 days',
+                      color: Colors.blue),
+                  SummaryCard(
+                      label: 'On Leave',
+                      value: '00 days',
+                      color: Colors.orange),
+                  SummaryCard(
+                      label: 'Absent', value: '00 days', color: Colors.red),
+                ],
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class DailyReportCard extends StatelessWidget {
+  final String month;
+  final String clockIn;
+  final String clockOut;
+  final bool isWeekend;
+
+  DailyReportCard({
+    required this.month,
+    required this.clockIn,
+    required this.clockOut,
+    this.isWeekend = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            color: Colors.black,
+            child: Center(
+              child: Text(
+                month,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          SizedBox(width: 16),
+          if (isWeekend)
+            Expanded(
+              child: Center(
+                child: Text(
+                  clockOut,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            )
+          else
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Clock In: $clockIn',
+                      style: TextStyle(color: Colors.black, fontSize: 12)),
+                  Text('Clock Out: $clockOut',
+                      style: TextStyle(color: Colors.black, fontSize: 12)),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class SummaryCard extends StatelessWidget {
+  final String label;
+  final String value;
+  final Color color;
+
+  SummaryCard({required this.label, required this.value, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 4),
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(backgroundColor: color, radius: 8),
+          SizedBox(width: 8),
+          Text(label, style: TextStyle(fontSize: 16)),
+          Spacer(),
+          Text(value,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        ],
       ),
     );
   }

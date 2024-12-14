@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomePage(),
     const AttendancePage(),
     const TimeSheetPage(),
-    const Menu(),
+    const NotificationPage(),
   ];
 
   @override

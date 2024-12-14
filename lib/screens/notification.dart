@@ -1,261 +1,135 @@
 import 'package:flutter/material.dart';
-import 'package:secondly/screens/attendance_page.dart';
-import 'package:secondly/screens/timesheets.dart';
 
-class Menu extends StatelessWidget {
-  const Menu({super.key});
+class NotificationPage extends StatelessWidget {
+  const NotificationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.red,
         elevation: 0,
-        toolbarHeight: 0, // Toolbar disembunyikan
+        centerTitle: true,
+        title: const Text(
+          "Announcement",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Bagian Profile
-          Container(
-            padding: const EdgeInsets.all(16),
-            margin: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(8),
+          // Search Bar
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const TextField(
+                decoration: InputDecoration(
+                  hintText: "Search",
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: Icon(Icons.mic),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.symmetric(vertical: 15.0),
+                ),
+              ),
             ),
+          ),
+
+          // Header for Message Filters
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Icon Profile
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.black,
-                  child: const Icon(
-                    Icons.person,
-                    size: 40,
-                    color: Colors.white,
+                Text(
+                  "All Message",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
                   ),
                 ),
-                const SizedBox(width: 16),
-                // Detail Karyawan
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 0),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ProfileScreen()),
-                          );
-                        },
-                        child: const Text(
-                          "View My Profile",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 25,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ],
+                Text(
+                  "Unread Message",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
                   ),
                 ),
               ],
             ),
           ),
-          // Bagian Menu Grid
+
+          // Notification List
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 3 / 2,
-                children: [
-                  // Tombol Attendance
-                  buildMenuButton(
-                    icon: Icons.access_time,
-                    label: "Attendance",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AttendancePage()),
-                      );
-                    },
-                  ),
-                  // Tombol Project
-                  buildMenuButton(
-                    icon: Icons.assignment,
-                    label: "Project",
-                    onTap: () {
-                      _showComingSoonPopup(context);
-                    },
-                  ),
-                  // Tombol Time Sheet
-                  buildMenuButton(
-                    icon: Icons.calendar_today,
-                    label: "Time Sheet",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TimeSheetPage()),
-                      );
-                    },
-                  ),
-                  // Tombol Leave
-                  buildMenuButton(
-                    icon: Icons.logout_outlined,
-                    label: "Leave",
-                    onTap: () {
-                      _showComingSoonPopup(
-                          context); //belum dibuat, sudah ada design
-                    },
-                  ),
-                  buildMenuButton(
-                    icon: Icons.import_contacts_outlined,
-                    label: "E-Learning",
-                    onTap: () {
-                      _showComingSoonPopup(context);
-                    },
-                  ),
-                  buildMenuButton(
-                    icon: Icons.more_time_rounded,
-                    label: "SPL",
-                    onTap: () {
-                      _showComingSoonPopup(context);
-                    },
-                  ),
-                ],
-              ),
+            child: ListView.builder(
+              itemCount: 5, // Jumlah dummy notifikasi
+              itemBuilder: (context, index) {
+                return NotificationCard(
+                  title: "Title",
+                  description: "Description",
+                  time: "9:41 AM",
+                );
+              },
             ),
           ),
         ],
       ),
     );
   }
-
-  // Helper Method untuk Membuat Tombol Menu
-  Widget buildMenuButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 32, color: Colors.black),
-            const SizedBox(height: 8),
-            Text(
-              label,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showComingSoonPopup(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Coming Soon"),
-          content: const Text("Sedang Dalam Pengembangan."),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
-  }
 }
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class NotificationCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final String time;
+
+  const NotificationCard({
+    Key? key,
+    required this.title,
+    required this.description,
+    required this.time,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        backgroundColor: Colors.red,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            const Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.grey,
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: ListTile(
+          leading: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(8),
             ),
-            const SizedBox(height: 20),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Employee Name:'),
+            child: const Icon(
+              Icons.image,
+              color: Colors.grey,
             ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Job Title:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Department:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Employee ID:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Email:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Phone:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Date of Birth:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Address:'),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Edit Profile'),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Center(
-              child: TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'more detail',
-                  style: TextStyle(color: Colors.blue),
-                ),
-              ),
-            ),
-          ],
+          ),
+          title: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(description),
+          trailing: Text(
+            time,
+            style: const TextStyle(color: Colors.grey, fontSize: 12),
+          ),
         ),
       ),
     );

@@ -35,6 +35,22 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void showComingSoonPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Coming Soon"),
+        content: const Text("Fitur ini sedang dalam pengembangan."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text("Tutup"),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildOption(BuildContext context, int index) {
     List<String> titles = [
       'Attendance',
@@ -64,18 +80,15 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: const Color.fromARGB(255, 245, 164, 131),
           child: Icon(
             icons[index],
-            size: 28, // Ukuran ikon
+            size: 28, //
             color: const Color.fromARGB(255, 255, 255, 255),
           ),
           radius: 30,
         ),
-        SizedBox(height: 6), // Jarak antara ikon dan teks
+        SizedBox(height: 6),
         Flexible(
-          child: Text(
-            titles[index],
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 12), // Ukuran teks
-          ),
+          child: Text(titles[index],
+              textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
         ),
       ],
     );
