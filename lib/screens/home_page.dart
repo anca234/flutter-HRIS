@@ -73,24 +73,31 @@ class _HomePageState extends State<HomePage> {
       Icons.grid_view,
     ];
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CircleAvatar(
-          backgroundColor: const Color.fromARGB(255, 245, 164, 131),
-          child: Icon(
-            icons[index],
-            size: 28, //
-            color: const Color.fromARGB(255, 255, 255, 255),
+    return GestureDetector(
+      onTap: () =>
+          showComingSoonPopup(context), // Tambahkan aksi saat opsi disentuh
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            backgroundColor: const Color.fromARGB(255, 245, 164, 131),
+            child: Icon(
+              icons[index],
+              size: 28,
+              color: const Color.fromARGB(255, 255, 255, 255),
+            ),
+            radius: 30,
           ),
-          radius: 30,
-        ),
-        SizedBox(height: 6),
-        Flexible(
-          child: Text(titles[index],
-              textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
-        ),
-      ],
+          const SizedBox(height: 6),
+          Flexible(
+            child: Text(
+              titles[index],
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 12),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -324,7 +331,7 @@ class _NextActivityWidgetState extends State<NextActivityWidget> {
               children: [
                 const Text(
                   "Next activity",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Icon(
                   isExpanded
@@ -336,7 +343,7 @@ class _NextActivityWidgetState extends State<NextActivityWidget> {
           ),
         ),
 
-        // List proyek (ditampilkan jika isExpanded true)
+        // List proyek
         if (isExpanded)
           ...activities.map((activity) {
             return Padding(
