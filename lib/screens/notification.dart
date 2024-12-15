@@ -8,8 +8,6 @@ class NotificationPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        elevation: 0,
-        centerTitle: true,
         title: const Text(
           "Announcement",
           style: TextStyle(

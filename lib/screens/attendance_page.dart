@@ -39,7 +39,11 @@ class AttendancePageState extends State<AttendancePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Attendance", style: TextStyle(color: Colors.white)),
+        title: const Text("Attendance",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            )),
         backgroundColor: Colors.red,
       ),
       body: SingleChildScrollView(

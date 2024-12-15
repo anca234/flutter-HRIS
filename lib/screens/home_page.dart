@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'attendance_page.dart';
+import 'timesheets.dart';
+import 'leave.dart';
+import 'timesheets.dart';
+import 'asset.dart';
+//import 'more.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -51,6 +57,88 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void showMoreOptions(BuildContext context) {
+    List<Map<String, dynamic>> moreOptions = [
+      {'title': 'Performance Evaluate', 'icon': Icons.assessment_outlined},
+      {'title': 'Claim', 'icon': Icons.store},
+      {'title': 'Dashboard', 'icon': Icons.dashboard},
+      {'title': 'Assessment', 'icon': Icons.assignment},
+      {'title': 'Document', 'icon': Icons.folder},
+      {'title': 'SPL', 'icon': Icons.more_time},
+      {'title': 'LMS', 'icon': Icons.school},
+      {'title': 'Knowledge Management', 'icon': Icons.import_contacts},
+      {'title': 'My Data', 'icon': Icons.person},
+      {'title': 'Schedule', 'icon': Icons.calendar_today},
+      {'title': 'Chat Room', 'icon': Icons.chat},
+      {'title': 'Contact', 'icon': Icons.contacts},
+    ];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (ctx) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "More Options",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  childAspectRatio: 0.9,
+                ),
+                itemCount: moreOptions.length,
+                itemBuilder: (ctx, index) {
+                  final option = moreOptions[index];
+                  return GestureDetector(
+                    onTap: () {
+                      showComingSoonPopup(context);
+                      //Navigator.of(ctx).pop(); // Menutup modal setelah klik
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor:
+                              const Color.fromARGB(255, 245, 164, 131),
+                          child: Icon(option['icon'], color: Colors.white),
+                          radius: 30,
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          option['title'],
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 10),
+                          maxLines: 2, // Batasi maksimal 2 baris
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildOption(BuildContext context, int index) {
     List<String> titles = [
       'Attendance',
@@ -73,9 +161,38 @@ class _HomePageState extends State<HomePage> {
       Icons.grid_view,
     ];
 
+    void navigateToPage() {
+      if (index == 0) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AttendancePage()),
+        );
+      } else if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const LeavePage()),
+        );
+      } else if (index == 2) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const TimeSheetPage()),
+        );
+      } else if (index == 3) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AssetPage()),
+        );
+      } else if (index == 7) {
+        // Tombol "More" menggunakan modal bottom sheet
+        showMoreOptions(context);
+      } else {
+        // Tampilkan pop-up "Coming Soon" untuk tombol lain
+        showComingSoonPopup(context);
+      }
+    }
+
     return GestureDetector(
-      onTap: () =>
-          showComingSoonPopup(context), // Tambahkan aksi saat opsi disentuh
+      onTap: navigateToPage, // Tambahkan aksi navigasi
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

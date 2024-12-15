@@ -1,212 +1,130 @@
 /*import 'package:flutter/material.dart';
-import 'package:secondly/screens/attendance_page.dart';
-import 'package:secondly/screens/timesheets.dart';
 
-class Menu extends StatelessWidget {
-  const Menu({super.key});
+class MorePage extends StatelessWidget {
+  const MorePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Tombol-tombol utama (7 pertama dari halaman utama)
+    List<Map<String, dynamic>> mainButtons = [
+      {'title': 'Attendance', 'icon': Icons.access_time},
+      {'title': 'Leave', 'icon': Icons.logout_outlined},
+      {'title': 'Time Sheet', 'icon': Icons.calendar_today},
+      {'title': 'Asset', 'icon': Icons.warehouse_rounded},
+      {'title': 'SPL', 'icon': Icons.more_time_rounded},
+      {'title': 'Claim', 'icon': Icons.store},
+      {'title': 'E-Learning', 'icon': Icons.import_contacts_outlined},
+    ];
+
+    // Tombol tambahan
+    List<Map<String, dynamic>> moreButtons = [
+      {'title': 'Performance Evaluate', 'icon': Icons.assessment},
+      {'title': 'Claim', 'icon': Icons.receipt_long},
+      {'title': 'Dashboard', 'icon': Icons.dashboard},
+      {'title': 'Assessment', 'icon': Icons.fact_check},
+      {'title': 'Document', 'icon': Icons.folder},
+      {'title': 'SPL', 'icon': Icons.more_time_rounded},
+      {'title': 'LMS', 'icon': Icons.school},
+      {'title': 'Knowledge Management', 'icon': Icons.lightbulb},
+      {'title': 'My Data', 'icon': Icons.person},
+      {'title': 'Schedule', 'icon': Icons.calendar_month},
+      {'title': 'Chat Room', 'icon': Icons.chat},
+      {'title': 'Contact', 'icon': Icons.contact_phone},
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[200],
-        elevation: 0,
-        toolbarHeight: 0, // Toolbar disembunyikan
+        title: const Text('More Options'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Bagian Menu Grid
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 3 / 2,
-                children: [
-                  // Tombol Attendance
-                  buildMenuButton(
-                    icon: Icons.access_time,
-                    label: "Attendance",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AttendancePage()),
-                      );
-                    },
-                  ),
-                  // Tombol Project
-                  buildMenuButton(
-                    icon: Icons.assignment,
-                    label: "Project",
-                    onTap: () {
-                      _showComingSoonPopup(context);
-                    },
-                  ),
-                  // Tombol Time Sheet
-                  buildMenuButton(
-                    icon: Icons.calendar_today,
-                    label: "Time Sheet",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TimeSheetPage()),
-                      );
-                    },
-                  ),
-                  // Tombol Leave
-                  buildMenuButton(
-                    icon: Icons.logout_outlined,
-                    label: "Leave",
-                    onTap: () {
-                      _showComingSoonPopup(
-                          context); //belum dibuat, sudah ada design
-                    },
-                  ),
-                  buildMenuButton(
-                    icon: Icons.import_contacts_outlined,
-                    label: "E-Learning",
-                    onTap: () {
-                      _showComingSoonPopup(context);
-                    },
-                  ),
-                  buildMenuButton(
-                    icon: Icons.more_time_rounded,
-                    label: "SPL",
-                    onTap: () {
-                      _showComingSoonPopup(context);
-                    },
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Tombol Utama
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                ),
+                itemCount: mainButtons.length,
+                itemBuilder: (context, index) {
+                  return _buildOption(
+                    context,
+                    mainButtons[index]['title'],
+                    mainButtons[index]['icon'],
+                  );
+                },
               ),
+
+              const SizedBox(height: 16),
+              const Divider(), // Garis pemisah
+              const SizedBox(height: 16),
+
+              // Tombol Tambahan
+              GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                ),
+                itemCount: moreButtons.length,
+                itemBuilder: (context, index) {
+                  return _buildOption(
+                    context,
+                    moreButtons[index]['title'],
+                    moreButtons[index]['icon'],
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOption(BuildContext context, String title, IconData icon) {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: const Text('Coming Soon'),
+            content: const Text('Fitur ini sedang dalam pengembangan.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(ctx).pop(),
+                child: const Text('Tutup'),
+              ),
+            ],
+          ),
+        );
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            backgroundColor: const Color.fromARGB(255, 245, 164, 131),
+            child: Icon(icon, color: Colors.white),
+            radius: 30,
+          ),
+          const SizedBox(height: 6),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 12),
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  // Helper Method untuk Membuat Tombol Menu
-  Widget buildMenuButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 32, color: Colors.black),
-            const SizedBox(height: 8),
-            Text(
-              label,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showComingSoonPopup(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Coming Soon"),
-          content: const Text("Sedang Dalam Pengembangan."),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("OK"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        backgroundColor: Colors.red,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            const Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.grey,
-              ),
-            ),
-            const SizedBox(height: 20),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Employee Name:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Job Title:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Department:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Employee ID:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Email:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Phone:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Date of Birth:'),
-            ),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Address:'),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Edit Profile'),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Center(
-              child: TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'more detail',
-                  style: TextStyle(color: Colors.blue),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
