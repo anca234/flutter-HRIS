@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'attendance_page.dart';
 import 'timesheets.dart';
 import 'leave.dart';
-import 'timesheets.dart';
 import 'asset.dart';
 //import 'more.dart';
 

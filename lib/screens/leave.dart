@@ -1,13 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:secondly/screens/home_page.dart';
-
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MaterialApp(
-    home: LeavePage(),
-  ));
-}
 
 class LeavePage extends StatelessWidget {
   const LeavePage({Key? key}) : super(key: key);
