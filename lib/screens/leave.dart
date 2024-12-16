@@ -1,7 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:secondly/screens/home_page.dart';
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: LeavePage(),
+  ));
+}
 
 class LeavePage extends StatelessWidget {
   const LeavePage({Key? key}) : super(key: key);
+
+  void _showLeaveOptions(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'What type of leave you want to apply for?',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            _buildOption(context, 'Annual Leave', () {
+              Navigator.pop(context);
+            }),
+            _buildOption(context, 'Unplanned Leave', () {
+              Navigator.pop(context);
+            }),
+            _buildOption(context, 'Planned Leave', () {
+              Navigator.pop(context);
+            }),
+            const Divider(height: 1),
+            _buildOption(context, 'Cancel', () {
+              Navigator.pop(context);
+            }, color: Colors.red),
+          ],
+        );
+      },
+    );
+  }
+
+  static Widget _buildOption(
+      BuildContext context, String text, VoidCallback onTap,
+      {Color color = Colors.black}) {
+    return ListTile(
+      title: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 18,
+            color: color,
+            fontWeight: text == 'Cancel' ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ),
+      onTap: onTap,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +98,9 @@ class LeavePage extends StatelessWidget {
               children: [
                 IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
                 const Text(
                   "September",
@@ -66,7 +137,14 @@ class LeavePage extends StatelessWidget {
 
                 // Tombol See Detail dan Apply Leave
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LeavePageDetail(),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     minimumSize: const Size(double.infinity, 45),
@@ -76,7 +154,9 @@ class LeavePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _showLeaveOptions(context); // Panggil fungsi pop-up
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
                     minimumSize: const Size(double.infinity, 45),
@@ -152,6 +232,165 @@ class LeavePage extends StatelessWidget {
         const SizedBox(height: 8),
         Text(title),
       ],
+    );
+  }
+}
+
+class LeavePageDetail extends StatelessWidget {
+  const LeavePageDetail({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.red,
+            title: const Text(
+              'Leave',
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () {
+                Navigator.pop(context); // Kembali ke halaman sebelumnya
+              },
+            ),
+            bottom: const TabBar(
+              labelColor: Colors.black,
+              indicatorColor: Colors.black,
+              tabs: [
+                Tab(text: 'All'),
+                Tab(text: 'Casual Leave'),
+                Tab(text: 'Sick Leave'),
+                Tab(text: 'Unpaid Leave'),
+              ],
+            ),
+          ),
+          body: const LeaveList(),
+        ),
+      ),
+    );
+  }
+}
+
+class LeaveList extends StatelessWidget {
+  const LeaveList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        // Remaining balance
+        Container(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'The remaining balance of all leave types:',
+                style: TextStyle(fontSize: 14, color: Colors.grey),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                color: Colors.grey.shade300,
+                child: const Text(
+                  '8',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Section Header - January 2025
+        _buildSectionHeader('January 2025'),
+        _buildLeaveCard('7 Days Application', 'Mon, 13 Jan', 'Annual Leave',
+            'Denied', Colors.red),
+        // Section Header - December 2024
+        _buildSectionHeader('December 2024'),
+        _buildLeaveCard('Full Day Application', 'Thu, 19 Dec', 'Sick Leave',
+            'Approved', Colors.green),
+        _buildLeaveCard('Half Day Application', 'Mon, 23 Dec', 'Annual Leave',
+            'Approved', Colors.green),
+        _buildLeaveCard('3 Days Application', 'Mon, 30 Dec', 'Unplanned Leave',
+            'Submitted', Colors.orange),
+        // Section Header - November 2024
+        _buildSectionHeader('November 2024'),
+        _buildLeaveCard('Full Day Application', 'Wed, 20 Nov', 'Sick Leave',
+            'Approved', Colors.green),
+        _buildLeaveCard('Full Day Application', 'Wed, 20 Nov', 'Sick Leave',
+            'Approved', Colors.green),
+      ],
+    );
+  }
+
+  Widget _buildSectionHeader(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, top: 16, bottom: 8),
+      child: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLeaveCard(String description, String date, String type,
+      String status, Color statusColor) {
+    return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+        side: const BorderSide(color: Colors.grey),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(12),
+        title: Text(
+          description,
+          style: const TextStyle(fontSize: 14, color: Colors.grey),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              date,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.black),
+            ),
+            Text(
+              type,
+              style: const TextStyle(fontSize: 14, color: Colors.black),
+            ),
+          ],
+        ),
+        trailing: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: statusColor,
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                status,
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 4),
+            const Icon(Icons.chevron_right, color: Colors.black),
+          ],
+        ),
+      ),
     );
   }
 }

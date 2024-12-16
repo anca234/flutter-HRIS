@@ -60,14 +60,11 @@ class _HomePageState extends State<HomePage> {
   void showMoreOptions(BuildContext context) {
     List<Map<String, dynamic>> moreOptions = [
       {'title': 'Performance Evaluate', 'icon': Icons.assessment_outlined},
-      {'title': 'Claim', 'icon': Icons.store},
       {'title': 'Dashboard', 'icon': Icons.dashboard},
       {'title': 'Assessment', 'icon': Icons.assignment},
       {'title': 'Document', 'icon': Icons.folder},
-      {'title': 'SPL', 'icon': Icons.more_time},
-      {'title': 'LMS', 'icon': Icons.school},
       {'title': 'Knowledge Management', 'icon': Icons.import_contacts},
-      {'title': 'My Data', 'icon': Icons.person},
+      {'title': 'My Data', 'icon': Icons.perm_identity},
       {'title': 'Schedule', 'icon': Icons.calendar_today},
       {'title': 'Chat Room', 'icon': Icons.chat},
       {'title': 'Contact', 'icon': Icons.contacts},
@@ -108,23 +105,40 @@ class _HomePageState extends State<HomePage> {
                   return GestureDetector(
                     onTap: () {
                       showComingSoonPopup(context);
-                      //Navigator.of(ctx).pop(); // Menutup modal setelah klik
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircleAvatar(
-                          backgroundColor:
-                              const Color.fromARGB(255, 245, 164, 131),
-                          child: Icon(option['icon'], color: Colors.white),
-                          radius: 30,
+                        // Rounded Rectangle with Shadow
+                        Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            borderRadius:
+                                BorderRadius.circular(12), // Membulatkan sudut
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black
+                                    .withOpacity(0.2), // Warna shadow
+                                spreadRadius: 1,
+                                blurRadius: 6,
+                                offset: const Offset(2, 4), // Posisi shadow
+                              ),
+                            ],
+                          ),
+                          width: 61,
+                          height: 61,
+                          child: Icon(
+                            option['icon'],
+                            color: const Color.fromARGB(255, 3, 3, 3),
+                            size: 35,
+                          ),
                         ),
                         const SizedBox(height: 5),
                         Text(
                           option['title'],
                           textAlign: TextAlign.center,
                           style: const TextStyle(fontSize: 10),
-                          maxLines: 2, // Batasi maksimal 2 baris
+                          maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
@@ -156,8 +170,8 @@ class _HomePageState extends State<HomePage> {
       Icons.calendar_today,
       Icons.warehouse_rounded,
       Icons.more_time_rounded,
-      Icons.store,
-      Icons.import_contacts_outlined,
+      Icons.currency_exchange,
+      Icons.school,
       Icons.grid_view,
     ];
 
@@ -196,14 +210,30 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircleAvatar(
-            backgroundColor: const Color.fromARGB(255, 245, 164, 131),
-            child: Icon(
-              icons[index],
-              size: 28,
+          // Rounded Rectangle with Shadow
+          Container(
+            decoration: BoxDecoration(
               color: const Color.fromARGB(255, 255, 255, 255),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 1, // Radius penyebaran shadow
+                  blurRadius: 6, // Radius blur shadow
+                  offset: const Offset(2, 4), // Posisi shadow (X, Y)
+                ),
+              ],
             ),
-            radius: 30,
+            width: 63, // Lebar kotak
+            height: 63, // Tinggi kotak
+            child: Center(
+              // Center agar ikon berada di tengah
+              child: Icon(
+                icons[index],
+                size: 35,
+                color: const Color.fromARGB(255, 0, 0, 0), // Warna icon
+              ),
+            ),
           ),
           const SizedBox(height: 6),
           Flexible(
@@ -240,15 +270,15 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          "Jane Doe",
+                          "Good Morning, Jane!",
                           style: TextStyle(
-                            fontSize: 32,
+                            fontSize: 30,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(height: 6),
                         Text(
-                          "IT Support",
+                          "Let's get to work!",
                           style: TextStyle(
                             fontSize: 18,
                           ),
@@ -273,14 +303,14 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: isClockedIn ? Colors.black : Colors.red,
                   minimumSize: const Size(double.infinity, 50),
                   shape: CircleBorder(),
-                  padding: EdgeInsets.all(60),
+                  padding: EdgeInsets.all(80),
                 ),
                 onPressed: handleClockInOut,
                 child: Text(
-                  isClockedIn ? "Clock Out" : "Clock In",
+                  isClockedIn ? "CLOCK OUT" : "CLOCK IN",
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 28,
+                    fontSize: 34,
                   ),
                 ),
               ),
