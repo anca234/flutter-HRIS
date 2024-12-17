@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'annualleave.dart';
+import 'unplannedleave.dart';
 
 class LeavePage extends StatelessWidget {
   const LeavePage({Key? key}) : super(key: key);
+
+  void showComingSoonPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text("Coming Soon"),
+        content: const Text("Fitur ini sedang dalam pengembangan."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text("Tutup"),
+          ),
+        ],
+      ),
+    );
+  }
 
   void _showLeaveOptions(BuildContext context) {
     showModalBottomSheet(
@@ -19,7 +37,7 @@ class LeavePage extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'What type of leave you want to apply for?',
+                'What type of leave do you want to apply for?',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
@@ -27,13 +45,19 @@ class LeavePage extends StatelessWidget {
               ),
             ),
             _buildOption(context, 'Annual Leave', () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LeaveFormScreen()),
+              );
             }),
             _buildOption(context, 'Unplanned Leave', () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UnplannedLeaveScreen()),
+              );
             }),
             _buildOption(context, 'Planned Leave', () {
-              Navigator.pop(context);
+              showComingSoonPopup(context);
             }),
             const Divider(height: 1),
             _buildOption(context, 'Cancel', () {

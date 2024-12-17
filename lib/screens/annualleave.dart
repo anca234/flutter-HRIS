@@ -11,6 +11,22 @@ class LeaveFormApp extends StatelessWidget {
   }
 }
 
+void submittedPopup(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: const Text("Form Submitted!"),
+      content: const Text("Leave form anda sudah terkirim!."),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(ctx).pop(),
+          child: const Text("Tutup"),
+        ),
+      ],
+    ),
+  );
+}
+
 class LeaveFormScreen extends StatefulWidget {
   const LeaveFormScreen({Key? key}) : super(key: key);
   @override
@@ -139,8 +155,7 @@ class _LeaveFormScreenState extends State<LeaveFormScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                     backgroundColor: Colors.red),
                 onPressed: () {
-                  // Add form submission logic here
-                  print('Form Submitted');
+                  submittedPopup(context);
                 },
                 child: Text('Submit',
                     style: TextStyle(fontSize: 16, color: Colors.white)),

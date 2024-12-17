@@ -196,16 +196,14 @@ class _HomePageState extends State<HomePage> {
           MaterialPageRoute(builder: (context) => const AssetPage()),
         );
       } else if (index == 7) {
-        // Tombol "More" menggunakan modal bottom sheet
         showMoreOptions(context);
       } else {
-        // Tampilkan pop-up "Coming Soon" untuk tombol lain
         showComingSoonPopup(context);
       }
     }
 
     return GestureDetector(
-      onTap: navigateToPage, // Tambahkan aksi navigasi
+      onTap: navigateToPage,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -223,14 +221,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            width: 63, // Lebar kotak
-            height: 63, // Tinggi kotak
+            width: 63,
+            height: 63,
             child: Center(
-              // Center agar ikon berada di tengah
               child: Icon(
                 icons[index],
                 size: 35,
-                color: const Color.fromARGB(255, 0, 0, 0), // Warna icon
+                color: const Color.fromARGB(255, 0, 0, 0),
               ),
             ),
           ),

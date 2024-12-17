@@ -32,6 +32,7 @@ class _MainScreenState extends State<MainScreen> {
             _currentIndex = index;
           });
         },
+        backgroundColor: Colors.black, // Set the background color to black
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.grey,
         items: const [
