@@ -91,7 +91,20 @@ class _UnplannedLeaveScreenState extends State<UnplannedLeaveScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Unplanned Leave Form')),
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title:
+            Text('Unplanned Leave Form', style: TextStyle(color: Colors.white)),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: Image.asset(
+              'assets/logoptap.png',
+              width: 50,
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(

@@ -45,6 +45,15 @@ class AttendancePageState extends State<AttendancePage> {
               fontWeight: FontWeight.bold,
             )),
         backgroundColor: Colors.red,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: Image.asset(
+              'assets/logoptap.png',
+              width: 50,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

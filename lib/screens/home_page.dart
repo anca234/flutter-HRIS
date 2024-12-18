@@ -3,6 +3,7 @@ import 'attendance_page.dart';
 import 'timesheets.dart';
 import 'leave.dart';
 import 'asset.dart';
+import 'profile.dart';
 //import 'more.dart';
 
 class HomePage extends StatefulWidget {
@@ -193,7 +194,7 @@ class _HomePageState extends State<HomePage> {
       } else if (index == 3) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const AssetPage()),
+          MaterialPageRoute(builder: (context) => const AssetScreen()),
         );
       } else if (index == 7) {
         showMoreOptions(context);
@@ -248,9 +249,36 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[200],
-        elevation: 0,
-        toolbarHeight: 0,
+        backgroundColor: Colors.white,
+        elevation: 1,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Logo
+            Image.asset(
+              'assets/logolengkapptap.png',
+              width: 170,
+            ),
+            //  profil
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProfileScreen()),
+                );
+              },
+              child: const CircleAvatar(
+                radius: 20,
+                backgroundColor: Colors.grey,
+                child: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -281,11 +309,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                  ),
-                  Image.asset(
-                    'assets/logoptap.png',
-                    width: 100,
-                    height: 100,
                   ),
                 ],
               ),

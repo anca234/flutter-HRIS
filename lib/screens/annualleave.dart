@@ -75,7 +75,19 @@ class _LeaveFormScreenState extends State<LeaveFormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Annual Leave Form')),
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        title: Text('Annual Leave Form', style: TextStyle(color: Colors.white)),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: Image.asset(
+              'assets/logoptap.png',
+              width: 50,
+            ),
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(

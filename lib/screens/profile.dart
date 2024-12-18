@@ -7,8 +7,17 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('Profile', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.red,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: Image.asset(
+              'assets/logoptap.png',
+              width: 50,
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

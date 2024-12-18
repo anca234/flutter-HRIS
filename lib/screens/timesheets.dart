@@ -36,20 +36,22 @@ class TimeSheetPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Time Sheet'),
+        title: const Text('Time Sheet', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.red,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: Image.asset(
+              'assets/logoptap.png',
+              width: 50,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                "My Time Sheet",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: DataTable(
@@ -121,6 +123,15 @@ class TimeSheetPageDetail extends StatelessWidget {
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18.0),
+            child: Image.asset(
+              'assets/logoptap.png',
+              width: 50,
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
