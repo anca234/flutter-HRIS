@@ -8,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromRGBO(204, 0, 0, 1.0),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 18.0),
@@ -19,6 +19,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

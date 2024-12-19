@@ -44,7 +44,7 @@ class AttendancePageState extends State<AttendancePage> {
               color: Colors.white,
               fontWeight: FontWeight.bold,
             )),
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromRGBO(204, 0, 0, 1.0),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 18.0),
@@ -55,6 +55,7 @@ class AttendancePageState extends State<AttendancePage> {
           ),
         ],
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

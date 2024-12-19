@@ -76,7 +76,7 @@ class _LeaveFormScreenState extends State<LeaveFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromRGBO(204, 0, 0, 1.0),
         title: Text('Annual Leave Form', style: TextStyle(color: Colors.white)),
         actions: [
           Padding(
@@ -88,6 +88,7 @@ class _LeaveFormScreenState extends State<LeaveFormScreen> {
           ),
         ],
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(

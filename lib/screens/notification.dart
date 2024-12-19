@@ -7,7 +7,7 @@ class NotificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromRGBO(204, 0, 0, 1.0),
         title: const Text(
           "Announcement",
           style: TextStyle(
@@ -26,6 +26,7 @@ class NotificationPage extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

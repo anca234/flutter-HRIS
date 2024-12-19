@@ -92,7 +92,7 @@ class _UnplannedLeaveScreenState extends State<UnplannedLeaveScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromRGBO(204, 0, 0, 1.0),
         title:
             Text('Unplanned Leave Form', style: TextStyle(color: Colors.white)),
         actions: [
@@ -105,6 +105,7 @@ class _UnplannedLeaveScreenState extends State<UnplannedLeaveScreen> {
           ),
         ],
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(

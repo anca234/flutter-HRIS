@@ -27,7 +27,7 @@ class _AssetScreenState extends State<AssetScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromRGBO(204, 0, 0, 1.0),
         title: const Text(
           "Asset",
           style: TextStyle(color: Colors.white, fontSize: 18),
@@ -46,6 +46,7 @@ class _AssetScreenState extends State<AssetScreen>
           ),
         ],
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Column(
         children: [
           // TabBar

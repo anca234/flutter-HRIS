@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      backgroundColor: Colors.white, // Ubah background menjadi putih
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
@@ -95,9 +96,9 @@ class _HomePageState extends State<HomePage> {
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 0.9,
+                  mainAxisSpacing: 24, // Meningkatkan jarak antar baris
+                  crossAxisSpacing: 16, // Jarak antar kolom tetap
+                  childAspectRatio: 0.9, // Rasio aspek tetap
                 ),
                 itemCount: moreOptions.length,
                 itemBuilder: (ctx, index) {
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                         // Rounded Rectangle with Shadow
                         Container(
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: Colors.white,
                             borderRadius:
                                 BorderRadius.circular(12), // Membulatkan sudut
                             boxShadow: [
@@ -133,13 +134,11 @@ class _HomePageState extends State<HomePage> {
                             size: 35,
                           ),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 2),
                         Text(
                           option['title'],
                           textAlign: TextAlign.center,
                           style: const TextStyle(fontSize: 10),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -280,6 +279,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

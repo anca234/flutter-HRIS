@@ -37,7 +37,7 @@ class TimeSheetPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Time Sheet', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromRGBO(204, 0, 0, 1.0),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 18.0),
@@ -48,6 +48,7 @@ class TimeSheetPage extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +58,7 @@ class TimeSheetPage extends StatelessWidget {
               child: DataTable(
                 showCheckboxColumn: false, // Hilangkan checkbox di sebelah kiri
                 headingRowColor: MaterialStateProperty.resolveWith(
-                  (states) => Colors.red.shade300,
+                  (states) => const Color.fromARGB(255, 255, 128, 128),
                 ),
                 columns: const [
                   DataColumn(
@@ -114,7 +115,7 @@ class TimeSheetPageDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromRGBO(178, 34, 34, 1.0),
         title: const Text(
           "Time Sheet",
           style: TextStyle(color: Colors.white),
@@ -133,6 +134,7 @@ class TimeSheetPageDetail extends StatelessWidget {
           ),
         ],
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,7 +165,7 @@ class TimeSheetPageDetail extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                      backgroundColor: const Color.fromRGBO(178, 34, 34, 1.0),
                     ),
                     child: const Text("Submit",
                         style: TextStyle(color: Colors.white)),
@@ -178,7 +180,7 @@ class TimeSheetPageDetail extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(20),
                 color: Colors.grey.shade300,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

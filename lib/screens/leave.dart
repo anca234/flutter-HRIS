@@ -91,7 +91,7 @@ class LeavePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromRGBO(204, 0, 0, 1.0),
         title: const Text(
           "Leave",
           style: TextStyle(color: Colors.white, fontSize: 18),
@@ -110,6 +110,7 @@ class LeavePage extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
