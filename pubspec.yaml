@@ -32,7 +32,15 @@ dependencies:
     sdk: flutter
   provider: 6.1.2
   cupertino_icons: ^1.0.8
+  flutter_native_splash: ^2.4.3
 
+flutter_native_splash:
+  android: true
+  ios: true
+  color: "#f7f7f7"
+  image: assets/logolengkapptap.png
+  fullscreen: true
+  image_mode: fill
 
 
 dev_dependencies:
@@ -55,6 +63,10 @@ flutter:
   assets:
     - assets/logoptap.png
     - assets/logolengkapptap.png
+    - assets/deadline.png
+    - assets/puzzletim.png
+    - assets/threepeople.png
+    - assets/brainstorming.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
